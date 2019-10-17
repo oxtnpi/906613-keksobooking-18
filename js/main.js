@@ -12,7 +12,7 @@ var ROOMS_GUESTS_BOUNDS = [1, 7];
 var OFFERS_COUNT = 8;
 
 var map = document.querySelector('.map');
-map.classList.remove('map--faded');
+var mapFaded = map.classList.remove('map--faded');
 
 var pinList = document.querySelector('.map__pins');
 
@@ -48,6 +48,7 @@ var generateAvatar = function (j) {
     avatar: 'img/avatars/user' + '0' + j + '.png'
   };
 };
+
 
 var generateLocation = function () {
   return {
@@ -89,6 +90,7 @@ var generateOffers = function () {
   return result;
 };
 
+
 var renderPin = function (details) {
   var pinElement = pinTemplate.cloneNode(true);
   pinElement.style.left = details.location.x + (pinElement.clientWidth / 2) + 'px';
@@ -106,8 +108,10 @@ var fillMap = function (data) {
   pinList.appendChild(fragment);
 };
 
-generateOffers();
-fillMap();
+if (mapFaded) {
+  generateOffers();
+  fillMap();
+}
 
 var adForm = document.querySelector('.ad-form');
 var mapFilters = document.querySelector('.map__filters');
