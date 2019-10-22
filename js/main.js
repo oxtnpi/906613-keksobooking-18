@@ -12,7 +12,9 @@ var ROOMS_GUESTS_BOUNDS = [1, 7];
 var OFFERS_COUNT = 8;
 
 var map = document.querySelector('.map');
-var mapFaded = map.classList.remove('map--faded');
+var removeClassMapFaded = function () {
+  map.classList.remove('map--faded');
+};
 
 var pinList = document.querySelector('.map__pins');
 
@@ -58,7 +60,6 @@ var generateLocation = function () {
 };
 
 var generateOffer = function (location) {
-
   return {
     title: 'Заголовок',
     address: location.x + ', ' + location.y,
@@ -100,18 +101,21 @@ var renderPin = function (details) {
   return pinElement;
 };
 
+var clearMap = function () {
+  var maplist = pinList.children;
+  for (var e = 2; e < maplist.length; e++) {
+    maplist.item(e).remove();
+  }
+};
+
 var fillMap = function (data) {
+  clearMap();
   var fragment = document.createDocumentFragment();
   for (var k = 0; k < data.length; k++) {
     fragment.appendChild(renderPin(data[k]));
   }
   pinList.appendChild(fragment);
 };
-
-if (mapFaded) {
-  generateOffers();
-  fillMap();
-}
 
 var adForm = document.querySelector('.ad-form');
 var mapFilters = document.querySelector('.map__filters');
@@ -162,8 +166,10 @@ var addAddressValue = function (pinWidth, pinHeight) {
 addAddressValue(0, 0);
 
 mapPinMain.addEventListener('mousedown', function () {
+  removeClassMapFaded();
   enableAll();
   addAddressValue(PIN_WIDTH, PIN_HEIGHT);
+  fillMap(generateOffers());
 });
 
 mapPinMain.addEventListener('keydown', function (evt) {
