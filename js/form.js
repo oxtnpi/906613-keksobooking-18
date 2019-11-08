@@ -52,7 +52,8 @@
     window.map.removeClassMapFaded();
     enableAll();
     addAddressValue(PIN_WIDTH, PIN_HEIGHT);
-    window.backend.load(window.map.fillMap, window.errorMessage.show);
+
+    window.backend.load(window.filter.applyFilter, window.errorMessage.show);
   });
 
   mapPinMain.addEventListener('keydown', function (evt) {
