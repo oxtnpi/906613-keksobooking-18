@@ -4,7 +4,7 @@
   var errorTemplate = document.querySelector('#error')
     .content
     .querySelector('.error');
-  var main = document.querySelector('main');
+  var main = document.querySelector('.main');
   var renderError = function (err) {
     var errorElement = errorTemplate.cloneNode(true);
     var errorText = document.querySelector('#error')
