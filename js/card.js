@@ -6,9 +6,22 @@
 
   var filterscontainer = document.querySelector('.map__filters-container');
 
+  var openedCard;
+
+
   window.card = {
     render: function (data) {
       var cardElement = cardTemplate.cloneNode(true);
+      var deleteCard = function () {
+        openedCard.remove();
+        openedCard = undefined;
+      };
+      if (openedCard === undefined) {
+        openedCard = cardElement;
+      } else {
+        deleteCard();
+        openedCard = cardElement;
+      }
       cardElement.querySelector('.popup__title').textContent = data.offer.title;
       cardElement.querySelector('.popup__text--address').textContent = data.offer.address;
       cardElement.querySelector('.popup__text--price').textContent = data.offer.price + '₽/ночь';
@@ -44,6 +57,13 @@
         popupPhotos.appendChild(newPhoto);
       });
 
+      var closeButton = cardElement.querySelector('.popup__close');
+      closeButton.addEventListener('click', deleteCard);
+      document.addEventListener('keydown', function (evt) {
+        if (evt.key === 'Escape') {
+          deleteCard();
+        }
+      });
       return cardElement;
     },
     add: function (data) {
@@ -53,6 +73,6 @@
       window.map.mapElement.insertBefore(fragment, filterscontainer);
     }
   };
-  window.card.add(window.data.generateOffers()[0]);
+
 
 })();
