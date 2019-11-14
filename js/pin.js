@@ -12,6 +12,9 @@
       pinElement.style.top = details.location.y + pinElement.clientHeight + 'px';
       pinElement.querySelector('img').src = details.author.avatar;
       pinElement.querySelector('img').alt = details.offer.title;
+      pinElement.addEventListener('click', function () {
+        window.card.add(details);
+      });
       return pinElement;
     }
   };
