@@ -10,6 +10,7 @@
   var SHUFFLE_COEFFICIENT = 0.5;
   var MAP_OFFSET = 50;
   var MAP_Y_BOUNDS = [130, 630];
+  var clientWidth = window.map.mapElement.clientWidth;
 
   function shuffle(array) {
     return array.sort(function () {
@@ -44,7 +45,7 @@
 
   var generateLocation = function () {
     return {
-      x: getRandomInBounds(MAP_OFFSET, window.map.mapElement.clientWidth - MAP_OFFSET),
+      x: getRandomInBounds(MAP_OFFSET, clientWidth - MAP_OFFSET),
       y: getRandomInBounds(MAP_Y_BOUNDS[0], MAP_Y_BOUNDS[1])
     };
   };
