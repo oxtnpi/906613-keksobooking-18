@@ -4,7 +4,8 @@
 
   var clearMap = function () {
     var maplist = pinList.children;
-    for (var e = 2; e < maplist.length; e++) {
+    var pinsCount = maplist.length;
+    for (var e = pinsCount - 1; e >= 2; e--) {
       maplist.item(e).remove();
     }
   };
