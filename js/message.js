@@ -9,6 +9,20 @@
     .content
     .querySelector('.success');
 
+  var deleteOnEscape = function (evt) {
+    if (evt.key === 'Escape') {
+      var successCont = main.querySelector('.success');
+      if (successCont) {
+        main.removeChild(successCont);
+      }
+      var errorCont = main.querySelector('.error');
+      if (errorCont) {
+        main.removeChild(errorCont);
+      }
+      document.removeEventListener('keydown', deleteOnEscape);
+    }
+  };
+
   var renderError = function (err) {
     var errorElement = errorTemplate.cloneNode(true);
     var errorText = document.querySelector('#error')
@@ -20,6 +34,7 @@
     var errorConteiner = document.querySelector('.error');
     var errorButton = document.querySelector('.error__button');
     errorButton.focus();
+    document.addEventListener('keydown', deleteOnEscape);
     errorButton.addEventListener('click', function () {
       main.removeChild(errorConteiner);
     });
@@ -28,14 +43,6 @@
   var renderSuccess = function () {
     var successElement = successTemplate.cloneNode(true);
     main.appendChild(successElement);
-    var successConteiner = document.querySelector('.success');
-
-    var deleteOnEscape = function (evt) {
-      if (evt.key === 'Escape') {
-        main.removeChild(successConteiner);
-        document.removeEventListener('keydown', deleteOnEscape);
-      }
-    };
     document.addEventListener('keydown', deleteOnEscape);
   };
 
