@@ -12,23 +12,27 @@
   var addAddressValue = function (pinWidth, pinHeight) {
     var leftValue = Math.round(parseInt(mapPinMain.style.left, 10));
     var topValue = Math.round(parseInt(mapPinMain.style.top, 10));
-    window.validate.address.value = (leftValue + pinWidth) + ', ' + (topValue + pinHeight);
+    window.address.value = (leftValue + pinWidth) + ', ' + (topValue + pinHeight);
   };
   addAddressValue(0, 0);
 
-  mapPinMain.addEventListener('mousedown', function () {
+  var activate = function () {
     window.map.removeClassMapFaded();
     window.form.enableAll();
+    window.data.requestData();
+    mapPinMain.removeEventListener('mousedown', activate);
+  };
 
+  mapPinMain.addEventListener('mousedown', activate);
 
-    window.backend.load(window.filter.applyFilter, window.errorMessage.show);
-  });
-
-  mapPinMain.addEventListener('keydown', function (evt) {
+  var activateOnEnter = function (evt) {
     if (evt.key === 'Enter') {
       window.form.enableAll();
+      mapPinMain.removeEventListener('keydown', activateOnEnter);
     }
-  });
+  };
+
+  mapPinMain.addEventListener('keydown', activateOnEnter);
 
   mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();

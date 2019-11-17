@@ -8,7 +8,6 @@
 
   var openedCard;
 
-
   window.card = {
     render: function (data) {
       var cardElement = cardTemplate.cloneNode(true);
@@ -59,11 +58,16 @@
 
       var closeButton = cardElement.querySelector('.popup__close');
       closeButton.addEventListener('click', deleteCard);
-      document.addEventListener('keydown', function (evt) {
+
+      var closeOnEscape = function (evt) {
         if (evt.key === 'Escape') {
           deleteCard();
+          document.removeEventListener('keydown', closeOnEscape);
         }
-      });
+      };
+      document.addEventListener('keydown', closeOnEscape);
+
+
       return cardElement;
     },
     add: function (data) {
@@ -73,6 +77,4 @@
       window.map.mapElement.insertBefore(fragment, filterscontainer);
     }
   };
-
-
 })();
