@@ -1,13 +1,16 @@
 'use strict';
 (function () {
+  var START_COUNT = 1;
+  var HIGH_COUNT = 2;
   var pinList = document.querySelector('.map__pins');
   var clear = function () {
-    var maplist = pinList.children;
-    var pinsCount = maplist.length;
-    for (var e = pinsCount - 1; e >= 2; e--) {
-      maplist.item(e).remove();
+    var mapPins = pinList.children;
+    var pinsCount = mapPins.length;
+    for (var e = pinsCount - START_COUNT; e >= HIGH_COUNT; e--) {
+      mapPins.item(e).remove();
     }
-    window.card.deleteCard();
+    window.card.close();
+
   };
 
   var fillMap = function (data) {
@@ -21,13 +24,13 @@
 
   window.map = {
     clear: clear,
-    fillMap: fillMap,
-    mapElement: document.querySelector('.map'),
+    fill: fillMap,
+    element: document.querySelector('.map'),
     removeClassMapFaded: function () {
-      this.mapElement.classList.remove('map--faded');
+      this.element.classList.remove('map--faded');
     },
     addsClassMapFaded: function () {
-      this.mapElement.classList.add('map--faded');
+      this.element.classList.add('map--faded');
     }
   };
 })();
