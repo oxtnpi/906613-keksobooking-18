@@ -8,13 +8,18 @@
 
   var openedCard;
 
+  var deleteCard = function () {
+    if (openedCard) {
+      openedCard.remove();
+      openedCard = undefined;
+    }
+  };
+
   window.card = {
+    deleteCard: deleteCard,
     render: function (data) {
       var cardElement = cardTemplate.cloneNode(true);
-      var deleteCard = function () {
-        openedCard.remove();
-        openedCard = undefined;
-      };
+
       if (openedCard === undefined) {
         openedCard = cardElement;
       } else {

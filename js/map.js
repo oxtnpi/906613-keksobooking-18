@@ -7,6 +7,7 @@
     for (var e = pinsCount - 1; e >= 2; e--) {
       maplist.item(e).remove();
     }
+    window.card.deleteCard();
   };
 
   var fillMap = function (data) {
