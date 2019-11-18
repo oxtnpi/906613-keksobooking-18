@@ -16,9 +16,10 @@
   var fillMap = function (data) {
     window.map.clear();
     var fragment = document.createDocumentFragment();
-    for (var k = 0; k < data.length; k++) {
-      fragment.appendChild(window.pin.render(data[k]));
-    }
+
+    data.forEach(function (pin) {
+      fragment.appendChild(window.pin.render(pin));
+    });
     pinList.appendChild(fragment);
   };
 

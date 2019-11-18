@@ -45,6 +45,7 @@
     adForm.reset();
     window.filter.reset();
     window.mainPin.start();
+    window.photo.clear();
   };
 
   var onSuccess = function () {

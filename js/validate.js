@@ -23,42 +23,27 @@
   var houseTypes = document.querySelector('#type');
   var timeIn = document.querySelector('#timein');
   var timeOut = document.querySelector('#timeout');
-  window.validate = {
-    address: document.querySelector('#address'),
-    TYPE_BUNGALO: 'bungalo',
-    TYPE_FLAT: 'flat',
-    TYPE_HOUSE: 'house',
-    TYPE_PALACE: 'palace',
-  };
+  var address = document.querySelector('#address');
 
   var validateCapasity = function () {
-    if (parseInt(roomNumber.value, 10) > ROOM_MAX_VALUE) {
-      if (parseInt(capasity.value, 10) === ROOM_EMPTY_VALUE) {
-        capasity.setCustomValidity('');
-      } else {
-        capasity.setCustomValidity('Для выбранного колличества комнат, колличество гостей равно — «не для гостей»');
-      }
+    capasity.setCustomValidity('');
+    if (parseInt(roomNumber.value, 10) > ROOM_MAX_VALUE
+      && parseInt(capasity.value, 10) !== ROOM_EMPTY_VALUE) {
+      capasity.setCustomValidity('Для выбранного колличества комнат, колличество гостей равно — «не для гостей»');
     }
-    if (parseInt(roomNumber.value, 10) === ROOM_MIN_VALUE) {
-      if (parseInt(capasity.value, 10) === ROOM_MIN_VALUE) {
-        capasity.setCustomValidity('');
-      } else {
-        capasity.setCustomValidity('Для выбранного колличества комнат, колличество гостей равно — «для 1 гостя»');
-      }
+    if (parseInt(roomNumber.value, 10) === ROOM_MIN_VALUE
+      && parseInt(capasity.value, 10) !== ROOM_MIN_VALUE) {
+      capasity.setCustomValidity('Для выбранного колличества комнат, колличество гостей равно — «для 1 гостя»');
     }
-    if (parseInt(roomNumber.value, 10) === ROOM_MEDIUM_VALUE) {
-      if (parseInt(capasity.value, 10) <= ROOM_MEDIUM_VALUE && parseInt(capasity.value, 10) !== ROOM_EMPTY_VALUE) {
-        capasity.setCustomValidity('');
-      } else {
-        capasity.setCustomValidity('Для выбранного колличества комнат, колличество гостей равно — «для 2 гостей» или «для 1 гостя»');
-      }
+    if (parseInt(roomNumber.value, 10) === ROOM_MEDIUM_VALUE
+      && (parseInt(capasity.value, 10) > ROOM_MEDIUM_VALUE
+      || parseInt(capasity.value, 10) === ROOM_EMPTY_VALUE)) {
+      capasity.setCustomValidity('Для выбранного колличества комнат, колличество гостей равно — «для 2 гостей» или «для 1 гостя»');
     }
-    if (parseInt(roomNumber.value, 10) === ROOM_MAX_VALUE) {
-      if (parseInt(capasity.value, 10) <= ROOM_MAX_VALUE && parseInt(capasity.value, 10) !== ROOM_EMPTY_VALUE) {
-        capasity.setCustomValidity('');
-      } else {
-        capasity.setCustomValidity('Для выбранного колличества комнат, колличество гостей равно — «для 3 гостей», «для 2 гостей» или «для 1 гостя»');
-      }
+    if (parseInt(roomNumber.value, 10) === ROOM_MAX_VALUE
+      && (parseInt(capasity.value, 10) > ROOM_MAX_VALUE
+      || parseInt(capasity.value, 10) === ROOM_EMPTY_VALUE)) {
+      capasity.setCustomValidity('Для выбранного колличества комнат, колличество гостей равно — «для 3 гостей», «для 2 гостей» или «для 1 гостя»');
     }
 
     title.required = true;
@@ -87,7 +72,7 @@
         break;
     }
 
-    window.validate.address.readOnly = true;
+    address.readOnly = true;
   };
 
   validateCapasity();
@@ -98,7 +83,16 @@
   timeOut.addEventListener('change', function () {
     timeIn.value = timeOut.value;
   });
-  roomNumber.onchange = validateCapasity;
-  capasity.onchange = validateCapasity;
-  houseTypes.onchange = validateCapasity;
+  roomNumber.addEventListener('change', validateCapasity);
+  capasity.addEventListener('change', validateCapasity);
+  houseTypes.addEventListener('change', validateCapasity);
+
+  window.validate = {
+    address: address,
+    TYPE_BUNGALO: 'bungalo',
+    TYPE_FLAT: 'flat',
+    TYPE_HOUSE: 'house',
+    TYPE_PALACE: 'palace',
+  };
+
 })();

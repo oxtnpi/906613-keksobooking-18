@@ -3,10 +3,7 @@
   var savedData = null;
 
   var getData = function () {
-    if (savedData === null) {
-      return [];
-    }
-    return savedData.slice();
+    return savedData === null ? [] : savedData.slice();
   };
 
   var onSuccess = function (data) {

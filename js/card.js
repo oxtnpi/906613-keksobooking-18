@@ -28,7 +28,6 @@
       openedCard = cardElement;
     } else {
       closeCard();
-      openedCard = cardElement;
     }
     cardElement.querySelector('.popup__title').textContent = data.offer.title;
     cardElement.querySelector('.popup__text--address').textContent = data.offer.address;

@@ -5,7 +5,7 @@
   var PIN_WIDTH = 40;
   var NEEDLE_WIDTH = PIN_WIDTH / 2;
   var PIN_HEIGHT = 44;
-  var MIN_X = 1;
+  var MIN_X = 0;
   var MIN_Y = 130;
   var MAX_Y = 630;
   var DEFAULT_LEFT = '570px';
@@ -73,11 +73,11 @@
         x: mapPinMain.offsetLeft - shifts.x
       };
 
-      if (endCoords.x >= MIN_X - NEEDLE_WIDTH && endCoords.x < mapSection.offsetWidth - PIN_WIDTH) {
+      if (endCoords.x >= MIN_X - NEEDLE_WIDTH && endCoords.x < mapSection.offsetWidth) {
         mapPinMain.style.left = endCoords.x + 'px';
       }
 
-      if (endCoords.y >= MIN_Y && endCoords.y <= MAX_Y) {
+      if (endCoords.y >= MIN_Y - PIN_HEIGHT && endCoords.y <= MAX_Y) {
         mapPinMain.style.top = endCoords.y + 'px';
       }
       addAddressValue(NEEDLE_WIDTH, PIN_HEIGHT);
