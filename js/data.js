@@ -1,7 +1,7 @@
 'use strict';
 (function () {
   var savedData = null;
-  // Отдает копию сохраненных данных
+
   var getData = function () {
     if (savedData === null) {
       return [];
@@ -11,13 +11,13 @@
 
   var onSuccess = function (data) {
     savedData = data;
-    window.filter.applyFilter(getData());
+    window.filter.apply(getData());
   };
   var requestData = function () {
-    window.backend.load(onSuccess, window.message.showError);
+    window.backend.load(onSuccess, window.message.error);
   };
   window.data = {
-    getData: getData,
-    requestData: requestData,
+    get: getData,
+    request: requestData,
   };
 })();

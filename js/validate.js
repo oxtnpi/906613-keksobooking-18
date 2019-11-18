@@ -1,19 +1,35 @@
 'use strict';
 (function () {
+  var TITLE_MAX_LENGTH = '100';
+  var PRICE_MAX = '1000000';
+  var PRICE_MIN = '0';
+  var PRICE_TYPE_FLAT_MIN = '1000';
+  var PRICE_TYPE_HOUSE_MIN = '5000';
+  var PRICE_TYPE_PALACE_MIN = '10000';
+  var TYPE_BUNGALO = 'bungalo';
+  var TYPE_FLAT = 'flat';
+  var TYPE_HOUSE = 'house';
+  var TYPE_PALACE = 'palace';
+  var ROOM_MAX_VALUE = 3;
+  var ROOM_MEDIUM_VALUE = 2;
+  var ROOM_MIN_VALUE = 1;
+  var ROOM_EMPTY_VALUE = 0;
+  var TITLE_MIN_LENGTH = '30';
+
   var roomNumber = document.querySelector('#room_number');
   var capasity = document.querySelector('#capacity');
   var title = document.querySelector('#title');
   var price = document.querySelector('#price');
   var houseTypes = document.querySelector('#type');
-  window.validate = {
-    address: document.querySelector('#address')
-  };
   var timeIn = document.querySelector('#timein');
   var timeOut = document.querySelector('#timeout');
-  var ROOM_MAX_VALUE = 3;
-  var ROOM_MEDIUM_VALUE = 2;
-  var ROOM_MIN_VALUE = 1;
-  var ROOM_EMPTY_VALUE = 0;
+  window.validate = {
+    address: document.querySelector('#address'),
+    TYPE_BUNGALO: 'bungalo',
+    TYPE_FLAT: 'flat',
+    TYPE_HOUSE: 'house',
+    TYPE_PALACE: 'palace',
+  };
 
   var validateCapasity = function () {
     if (parseInt(roomNumber.value, 10) > ROOM_MAX_VALUE) {
@@ -45,33 +61,33 @@
       }
     }
 
-    title.required = 'true';
-    title.minLength = '30';
-    title.maxLength = '100';
+    title.required = true;
+    title.minLength = TITLE_MIN_LENGTH;
+    title.maxLength = TITLE_MAX_LENGTH;
 
-    price.required = 'true';
-    price.max = '1000000';
+    price.required = true;
+    price.max = PRICE_MAX;
 
     switch (houseTypes.value) {
-      case 'bungalo':
-        price.min = '0';
-        price.placeholder = '0';
+      case TYPE_BUNGALO:
+        price.min = PRICE_MIN;
+        price.placeholder = PRICE_MIN;
         break;
-      case 'flat':
-        price.min = '1000';
-        price.placeholder = '1000';
+      case TYPE_FLAT:
+        price.min = PRICE_TYPE_FLAT_MIN;
+        price.placeholder = PRICE_TYPE_FLAT_MIN;
         break;
-      case 'house':
-        price.min = '5000';
-        price.placeholder = '5000';
+      case TYPE_HOUSE:
+        price.min = PRICE_TYPE_HOUSE_MIN;
+        price.placeholder = PRICE_TYPE_HOUSE_MIN;
         break;
-      case 'palace':
-        price.min = '10000';
-        price.placeholder = '10000';
+      case TYPE_PALACE:
+        price.min = PRICE_TYPE_PALACE_MIN;
+        price.placeholder = PRICE_TYPE_PALACE_MIN;
         break;
     }
 
-    window.validate.address.readOnly = 'true';
+    window.validate.address.readOnly = true;
   };
 
   validateCapasity();

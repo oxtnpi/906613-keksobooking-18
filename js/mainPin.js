@@ -8,6 +8,8 @@
   var MIN_X = 1;
   var MIN_Y = 130;
   var MAX_Y = 630;
+  var DEFAULT_LEFT = '570px';
+  var DEFAULT_TOP = '375px';
 
   var addAddressValue = function (pinWidth, pinHeight) {
     var leftValue = Math.round(parseInt(mapPinMain.style.left, 10));
@@ -16,11 +18,20 @@
   };
   addAddressValue(0, 0);
 
+  var start = function () {
+    mapPinMain.style.left = DEFAULT_LEFT;
+    mapPinMain.style.top = DEFAULT_TOP;
+    addAddressValue(0, 0);
+  };
+
+  window.mainPin = {
+    start: start
+  };
+
   var activate = function () {
     window.map.removeClassMapFaded();
     window.form.enableAll();
-    window.data.requestData();
-    mapPinMain.removeEventListener('mousedown', activate);
+    window.data.request();
   };
 
   mapPinMain.addEventListener('mousedown', activate);
@@ -47,7 +58,7 @@
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
       dragged = true;
-      var shift = {
+      var shifts = {
         x: startCoords.x - moveEvt.clientX,
         y: startCoords.y - moveEvt.clientY
       };
@@ -58,8 +69,8 @@
       };
 
       var endCoords = {
-        y: mapPinMain.offsetTop - shift.y,
-        x: mapPinMain.offsetLeft - shift.x
+        y: mapPinMain.offsetTop - shifts.y,
+        x: mapPinMain.offsetLeft - shifts.x
       };
 
       if (endCoords.x >= MIN_X - NEEDLE_WIDTH && endCoords.x < mapSection.offsetWidth - PIN_WIDTH) {

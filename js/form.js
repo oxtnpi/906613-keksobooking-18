@@ -6,10 +6,11 @@
   var mapFeatures = mapFilters.querySelector('.map__features');
   var adFormHeader = document.querySelector('.ad-form-header');
   var adFormElements = document.querySelectorAll('.ad-form__element');
+  var resetForm = document.querySelector('.ad-form__reset');
 
   var disableForm = function (list) {
     list.forEach(function (item) {
-      item.setAttribute('disabled', 'true');
+      item.setAttribute('disabled', true);
     });
   };
 
@@ -35,27 +36,38 @@
     enableForm(adFormElements);
   };
 
-  window.form = {
-    disableAll: disableAll,
-    enableAll: enableAll
-  };
-
   disableAll();
 
-  var onSuccess = function () {
-    window.message.showSuccess();
+  var resetAll = function () {
     window.form.disableAll();
     window.map.addsClassMapFaded();
     window.map.clear();
     adForm.reset();
+    window.filter.reset();
+    window.mainPin.start();
+  };
+
+  var onSuccess = function () {
+    window.message.success();
+    resetAll();
   };
 
   var onFail = function (err) {
-    window.message.showError(err);
+    window.message.error(err);
   };
   adForm.addEventListener('submit', function (evt) {
     window.backend.save(new FormData(adForm), onSuccess, onFail);
     evt.preventDefault();
   });
+
+  resetForm.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    resetAll();
+  });
+
+  window.form = {
+    disableAll: disableAll,
+    enableAll: enableAll
+  };
 })();
 
