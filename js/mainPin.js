@@ -3,7 +3,7 @@
   var mapPinMain = document.querySelector('.map__pin--main');
   var mapSection = document.querySelector('.map');
   var PIN_WIDTH = 40;
-  var NEEDLE_WIDTH = Math.floor(PIN_WIDTH / 2);
+  var NEEDLE_WIDTH = PIN_WIDTH / 2;
   var PIN_HEIGHT = 44;
   var MIN_X = 0;
   var MIN_Y = 130;
