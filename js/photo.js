@@ -2,6 +2,7 @@
 
 (function () {
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+  var IMAGE_SIZE = '100%';
 
   var avatarChooser = document.querySelector('#avatar');
   var avatarPreview = document.querySelector('.ad-form-header__preview img');
@@ -36,6 +37,7 @@
 
   imgChooser.addEventListener('change', function () {
     var newImage = document.createElement('img');
+    newImage.style.width = IMAGE_SIZE;
     imgContainer.appendChild(newImage);
     loadPhoto(imgChooser, newImage);
   });
