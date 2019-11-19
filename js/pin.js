@@ -1,5 +1,8 @@
 'use strict';
 (function () {
+  var PIN_WIDTH = 50;
+  var NEEDLE_WIDTH = PIN_WIDTH / 2;
+  var PIN_HEIGHT = 70;
   var pinTemplate = document.querySelector('#pin')
     .content
     .querySelector('.map__pin');
@@ -12,8 +15,8 @@
 
   var render = function (details) {
     var pinElement = pinTemplate.cloneNode(true);
-    pinElement.style.left = details.location.x + (pinElement.clientWidth / 2) + 'px';
-    pinElement.style.top = details.location.y + pinElement.clientHeight + 'px';
+    pinElement.style.left = details.location.x - NEEDLE_WIDTH + 'px';
+    pinElement.style.top = details.location.y - PIN_HEIGHT + 'px';
     pinElement.querySelector('img').src = details.author.avatar;
     pinElement.querySelector('img').alt = details.offer.title;
     pinElement.addEventListener('click', function () {
