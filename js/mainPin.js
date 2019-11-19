@@ -3,7 +3,7 @@
   var mapPinMain = document.querySelector('.map__pin--main');
   var mapSection = document.querySelector('.map');
   var PIN_WIDTH = 40;
-  var NEEDLE_WIDTH = PIN_WIDTH / 2;
+  var NEEDLE_WIDTH = Math.floor(PIN_WIDTH / 2);
   var PIN_HEIGHT = 44;
   var MIN_X = 0;
   var MIN_Y = 130;
@@ -73,11 +73,11 @@
         x: mapPinMain.offsetLeft - shifts.x
       };
 
-      if (endCoords.x >= MIN_X - NEEDLE_WIDTH && endCoords.x < mapSection.offsetWidth) {
+      if (endCoords.x >= MIN_X - NEEDLE_WIDTH && endCoords.x <= mapSection.offsetWidth - NEEDLE_WIDTH) {
         mapPinMain.style.left = endCoords.x + 'px';
       }
 
-      if (endCoords.y >= MIN_Y - PIN_HEIGHT && endCoords.y <= MAX_Y) {
+      if (endCoords.y >= MIN_Y - PIN_HEIGHT && endCoords.y <= MAX_Y - PIN_HEIGHT) {
         mapPinMain.style.top = endCoords.y + 'px';
       }
       addAddressValue(NEEDLE_WIDTH, PIN_HEIGHT);
